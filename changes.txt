@@ -1,0 +1,31 @@
+Changes from version 2:
+- Several barely useful features have been removed:
+	- The skill bar. If you're doing archaeology, chances are you'll spend your time at max skill.
+	- The travel frame. Aside from the hearthstone, most travel options are class spells, and you'll be used to using these outside Excavatinator anyway.
+	- The item use frame. Archaeology items with on-use effects are generally toys now.
+	- The links frame. Links were useful before, but as far as I can tell these differences have mostly been cleaned up by now. If you have a different experience, tell me and I'll work on remaking it.
+	- The total completion bar. For me, at least, this was mostly just in the way.
+- The main window has had several changes:
+	- The race texture is displayed next to its name.
+	- The list is now paginated, races are split by the expansion that introduced them.
+	- Solving an artifact is no longer done by right clicking, but rather by clicking the artifact icon which will light up when you can solve an artifact.
+	- The crate icon can now be clicked to crate an artifact, if you have any.
+	- Using keystones for solves is now optional. This feature is now disabled by default.
+	- Pristine artifacts are now counted as racial artifacts, and are required for race completion.
+	- The Survey button is much bigger, befitting its status as the main ability of Archaeology.
+	- Various tooltips have had their Rainbow Road factor removed.
+- Collapsing Excavatinator now works completely differently:
+	- The old version would simply hide the races that were not available on the current continent and shrink the window to fit.
+	- The new version collapses to a much smaller window, with only the most essential tools: Survey, solve, and crate.
+	- The solve button will appear when you have enough fragments to solve an artifact of a race, and can be clicked to solve that artifact.
+- The artifact list is no longer split into rare, common and pristine artifacts. Instead, the list is now a single list of artifacts.
+	- Rare artifacts still appear above common artifacts.
+	- Pristine artifacts are no longer listed separately; these now appear as a quest exclamation mark next to the common artifact if incomplete, or a check mark if completed.
+	- If an artifact has an associated achievement for collecting some number of that artifact, this is now displayed as a completion bar in the artifact list. This feature replaces the achievement frame.
+
+Fixes from version 3:
+- There was a bug that kept the addon from creating its saved variable for new users. This has now been fixed.
+- Opening the addon for the first time in a session now presents a short-time loading screen. This is to get around Blizzard's item cache throttling.
+
+Work in progress/features not implemented in this version
+- Minimap tracking. I want to remove the dependency on the library I used for this, so I need to research how to do this myself.

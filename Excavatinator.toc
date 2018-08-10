@@ -1,0 +1,17 @@
+## Interface: 80000
+## Title: Excavatinator
+## Notes: An archaeology helper that includes a checklist of completed artifacts
+## Author: Tutti (Azjol-Nerub EU)
+## Version: 3.0
+## SavedVariables: ExcavatinatorDB
+
+data.lua
+helpers.lua
+
+base.lua
+data-objects.lua
+data-processing.lua
+
+frame.lua
+
+main.lua
