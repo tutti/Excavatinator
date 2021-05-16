@@ -1,17 +1,38 @@
-## Interface: 80000
+## Interface: 90001
 ## Title: Excavatinator
 ## Notes: An archaeology helper that includes a checklist of completed artifacts
 ## Author: Tutti (Azjol-Nerub EU)
-## Version: 3.0
+## Version: 4.0
 ## SavedVariables: ExcavatinatorDB
+## Dependencies: ExcavatinatorAPI
 
-data.lua
-helpers.lua
+Class.lua
+Event.lua
 
-base.lua
-data-objects.lua
-data-processing.lua
+locals.lua
 
-frame.lua
+frames/Frame.lua
+frames/Window.lua
+
+components/Bar.lua
+components/Label.lua
+components/Button.lua
+
+components/buttons/CheckButton.lua
+components/buttons/TextureButton.lua
+components/buttons/SpellButton.lua
+
+widgets/Tooltip.lua
+widgets/PageController.lua
+widgets/ArtifactSolveButton.lua
+widgets/SurveyButton.lua
+widgets/RaceLine.lua
+widgets/CrateManager.lua
+
+frames/RaceDetailsWindow/ArtifactIcon.lua
+frames/RaceDetailsWindow.lua
+frames/MiniWindow.lua
+
+frames/MainWindow.lua
 
 main.lua

@@ -1,31 +1,40 @@
-Changes from version 2:
-- Several barely useful features have been removed:
-	- The skill bar. If you're doing archaeology, chances are you'll spend your time at max skill.
-	- The travel frame. Aside from the hearthstone, most travel options are class spells, and you'll be used to using these outside Excavatinator anyway.
-	- The item use frame. Archaeology items with on-use effects are generally toys now.
-	- The links frame. Links were useful before, but as far as I can tell these differences have mostly been cleaned up by now. If you have a different experience, tell me and I'll work on remaking it.
-	- The total completion bar. For me, at least, this was mostly just in the way.
-- The main window has had several changes:
-	- The race texture is displayed next to its name.
-	- The list is now paginated, races are split by the expansion that introduced them.
-	- Solving an artifact is no longer done by right clicking, but rather by clicking the artifact icon which will light up when you can solve an artifact.
-	- The crate icon can now be clicked to crate an artifact, if you have any.
-	- Using keystones for solves is now optional. This feature is now disabled by default.
-	- Pristine artifacts are now counted as racial artifacts, and are required for race completion.
-	- The Survey button is much bigger, befitting its status as the main ability of Archaeology.
-	- Various tooltips have had their Rainbow Road factor removed.
-- Collapsing Excavatinator now works completely differently:
-	- The old version would simply hide the races that were not available on the current continent and shrink the window to fit.
-	- The new version collapses to a much smaller window, with only the most essential tools: Survey, solve, and crate.
-	- The solve button will appear when you have enough fragments to solve an artifact of a race, and can be clicked to solve that artifact.
-- The artifact list is no longer split into rare, common and pristine artifacts. Instead, the list is now a single list of artifacts.
-	- Rare artifacts still appear above common artifacts.
-	- Pristine artifacts are no longer listed separately; these now appear as a quest exclamation mark next to the common artifact if incomplete, or a check mark if completed.
-	- If an artifact has an associated achievement for collecting some number of that artifact, this is now displayed as a completion bar in the artifact list. This feature replaces the achievement frame.
++-----------------------------------+
+| Changes from version 3 - overview |
++-----------------------------------+
+This is version 4 of Excavatinator. Much like previous versions, the major version update represents a significant
+rewrite to improve the quality of the addon, as well as the quality of the code. The entire data layer has been
+separated out into a separate addon named Excavatinator API, which is open for anyone who wants to use it. The race
+information window has been redesigned as well, and now opens below the main frame rather than next to it.
 
-Fixes from version 3:
-- There was a bug that kept the addon from creating its saved variable for new users. This has now been fixed.
-- Opening the addon for the first time in a session now presents a short-time loading screen. This is to get around Blizzard's item cache throttling.
++-------------------------+
+| The race details window |
++-------------------------+
+The race information window has been completely redesigned. It now prominently shows which race's artifacts are being
+shown, and uses icons rather than item names to do so. Artifacts that haven't been completed are shown as grey and
+slightly faded, while those that have been completed are fully saturated and opaque. The exclamation mark for pristine
+artifacts is now shown in the corner of the icon, while for artifacts with associated achievements the counter is shown
+at the bottom of the icon. Both now go away when their respective objective is completed, leaving a fully completed race
+appearing with the same style no matter which era it's from.
 
-Work in progress/features not implemented in this version
-- Minimap tracking. I want to remove the dependency on the library I used for this, so I need to research how to do this myself.
+You can hover your mouse pointer over the artifact's icon to see more information about it, like how many times you have
+completed it and its artifact description.
+
++---------------------+
+| The minified window |
++---------------------+
+The minified archaeology helper now counts as a separate window, which means you can have both it and the main
+Excavatinator window open at the same time. The button to open the minified window is in the same place it used to be.
+The solve button has also been improved; instead of only showing up when you have an artifact ready to solve, it now
+appears once you acquire a fragment or keystone, and updates to show the progress for the race you most recently got
+fragments or keystones for.
+
++-----------+
+| Bug fixes |
++-----------+
+The impetus for once again doing deep work with Excavatinator was a particularly annoying bug in version 3: in many
+cases, such as when going through a loading screen or solving an artifact, Blizzard's API would start returning 0 for
+the solve count for the current artifact of some or all races, causing Excavatinator to report one point of progression
+less than you actually had. A /reload would work around it, but if this annoyed you to look at you might have to do
+that somewhat frequently. In version 4 the data layer is much more self sufficient, using Blizzard's API for initial
+data and for updates, but keeping its own copy of data otherwise, which seems to have improved this issue significantly
+in my personal testing.
