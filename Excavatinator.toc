@@ -3,8 +3,12 @@
 ## Notes: An archaeology helper that includes a checklist of completed artifacts
 ## Author: Tutti (Azjol-Nerub EU)
 ## Version: 4.0
-## SavedVariables: ExcavatinatorDB
+## SavedVariablesPerCharacter: ExcavatinatorSettings
 ## Dependencies: ExcavatinatorAPI
+
+Libs\LibStub\LibStub.lua
+Libs\HereBeDragons\HereBeDragons-2.0.lua
+Libs\HereBeDragons\HereBeDragons-Pins-2.0.lua
 
 Class.lua
 Event.lua
@@ -34,5 +38,7 @@ frames/RaceDetailsWindow.lua
 frames/MiniWindow.lua
 
 frames/MainWindow.lua
+
+MinimapManager.lua
 
 main.lua

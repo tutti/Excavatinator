@@ -3,12 +3,12 @@ local ADDON_NAME, private = ...
 local Event = private.Event
 
 private.loadSettings = function()
-    if not ExcavatinatorDB then
-        ExcavatinatorDB = {
+    if not ExcavatinatorSettings then
+        ExcavatinatorSettings = {
             useKeystones = false
         }
     end
-    private.settings = ExcavatinatorDB
+    private.settings = ExcavatinatorSettings
 end
 
 local events = {

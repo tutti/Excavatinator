@@ -1,6 +1,7 @@
 local _, private = ...
 
 local TextureButton = private.TextureButton
+local Label = private.Label
 
 local events = private.events
 
@@ -26,6 +27,9 @@ function ArtifactSolveButton:construct(parent)
     self.pristineMark.texture:SetHeight(16)
     self.pristineMark.texture:SetTexCoord(1/8, 2/8, 1/2, 1)
 
+    self.achievementLabel = Label:new(self.frame, '0/20', 10)
+    self.achievementLabel.frame:SetPoint('BOTTOMLEFT', self.frame, 'BOTTOMLEFT', -2, -2)
+
     self.listener = function() self:redraw() end
     events.settingsChanged:addListener(self.listener)
 end
@@ -45,6 +49,13 @@ function ArtifactSolveButton:redraw()
         self.pristineMark.texture:Show()
     else
         self.pristineMark.texture:Hide()
+    end
+
+    if artifact.hasAchievement and artifact.timesCompleted < artifact.achievementRequirement then
+        self.achievementLabel:setText(artifact.timesCompleted .. '/' .. artifact.achievementRequirement)
+        self.achievementLabel.frame:Show()
+    else
+        self.achievementLabel.frame:Hide()
     end
 
     local _, _, canSolve = artifact:getProgress(private.settings.useKeystones)

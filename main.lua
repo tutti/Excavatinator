@@ -9,8 +9,9 @@ end
 
 Excavatinator.events.ready:addOnceListener(function()
     private.loadSettings()
+    private.loadMinimapManager()
     mainWindow:onLoad()
 end)
 
-SLASH_EXCAVATINATOR41 = '/arch'
-SlashCmdList["EXCAVATINATOR4"] = showMainWindow
+SLASH_EXCAVATINATOR1 = '/arch'
+SlashCmdList["EXCAVATINATOR"] = showMainWindow
