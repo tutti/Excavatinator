@@ -25,10 +25,10 @@ end
 
 function MinimapManager:createPinForFind(find)
     local icon = CreateFrame('Frame')
-    icon:SetWidth(8)
-    icon:SetHeight(8)
+    icon:SetWidth(10)
+    icon:SetHeight(10)
     icon.texture = icon:CreateTexture()
-    icon.texture:SetTexture(134435) -- The shovel for "Survey"
+    icon.texture:SetTexture(457644)
     icon.texture:SetDrawLayer("BACKGROUND")
     icon.texture:SetAllPoints()
     self.hbdPins:AddMinimapIconMap('Excavatinator', icon, find.mapID, find.mapX, find.mapY, true)

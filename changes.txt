@@ -28,6 +28,13 @@ The solve button has also been improved; instead of only showing up when you hav
 appears once you acquire a fragment or keystone, and updates to show the progress for the race you most recently got
 fragments or keystones for.
 
++---------------+
+| Minimap icons |
++---------------+
+Minimap icons are back! Any time you unearth a find, its location will be remembered and marked on your minimap whenever
+you're digging in the area. The icons will only appear when you're at the same digsite, so they won't clutter up your
+map at other times.
+
 +-----------+
 | Bug fixes |
 +-----------+

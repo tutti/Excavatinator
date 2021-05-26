@@ -9,7 +9,7 @@ local RaceDetailsWindow = Window:extend()
 private.RaceDetailsWindow = RaceDetailsWindow
 
 local RARE_ICONS = 10
-local COMMON_ICONS = 30
+local COMMON_ICONS = 32
 
 function RaceDetailsWindow:construct(parent)
     Window.construct(self, 'ExcavatinatorRaceDetailsWindow', parent)
@@ -73,7 +73,7 @@ function RaceDetailsWindow:construct(parent)
     self.commonIcons = {}
     for i=1, COMMON_ICONS do
         self.commonIcons[i] = ArtifactIcon:new(self.frame, i)
-        self.commonIcons[i].frame:SetPoint('TOPLEFT', 200 + 40*((i-1) % 10), -135 - 40*math.floor((i-1)/10))
+        self.commonIcons[i].frame:SetPoint('TOPLEFT', 200 + 40*((i-1) % 8), -135 - 40*math.floor((i-1)/8))
     end
 
     self.frame:Hide()

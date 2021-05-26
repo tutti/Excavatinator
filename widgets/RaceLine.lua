@@ -17,7 +17,7 @@ function RaceLine:construct(parent, race)
 
     self.race = race
 
-    self.frame:SetWidth(620)
+    self.frame:SetWidth(480)
     self.frame:SetHeight(50)
     self.frame:RegisterForClicks('LeftButtonUp')
 
@@ -30,25 +30,25 @@ function RaceLine:construct(parent, race)
     self.icon:SetPoint('LEFT', 0, -10)
 
     self.raceName = Label:new(self.frame, race.name)
-    self.raceName.frame:SetPoint("LEFT", 50, 0)
+    self.raceName.frame:SetPoint("TOPLEFT", 50, -15)
 
     self.progressBar = Bar:new('ExcavatinatorRaceProgressBar' .. race.id, self.frame)
-    self.progressBar:setSize(160, 10)
-    self.progressBar.frame:SetPoint("LEFT", 190, 0)
+    self.progressBar:setSize(250, 5)
+    self.progressBar.frame:SetPoint("BOTTOMLEFT", 50, 15)
 
     self.progressLabel = Label:new(self.frame, "50 / 50")
-    self.progressLabel.frame:SetPoint("LEFT", 360, 0)
+    self.progressLabel.frame:SetPoint("TOPRIGHT", self.frame, "TOPLEFT", 300, -15)
 
     self.artifactButton = ArtifactSolveButton:new(self.frame)
-    self.artifactButton.frame:SetPoint('LEFT', 435, 0)
+    self.artifactButton.frame:SetPoint('RIGHT', -115, 0)
     self.artifactButton:setRace(race)
 
     self.artifactBar = Bar:new('ExcavatinatorRaceFragmentBar' .. race.id, self.frame)
-    self.artifactBar:setSize(50, 10)
-    self.artifactBar.frame:SetPoint("LEFT", 480, 0)
+    self.artifactBar:setSize(100, 5)
+    self.artifactBar.frame:SetPoint("BOTTOMRIGHT", 0, 15)
 
     self.artifactCount = Label:new(self.frame, "200 / 200")
-    self.artifactCount.frame:SetPoint("LEFT", 540, 0)
+    self.artifactCount.frame:SetPoint("TOPRIGHT", 0, -15)
 
     self.tooltip = Tooltip:new(self.frame, function(tooltip)
         local completed, total, solves = self.race:getProgress(true)

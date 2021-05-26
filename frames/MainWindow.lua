@@ -21,7 +21,7 @@ function Page:construct(pageName, parent, races)
     self.name = pageName
 
     self.frame:SetPoint('TOPLEFT', 30, -35)
-    self.frame:SetWidth(590)
+    self.frame:SetWidth(480)
     self.frame:SetHeight(35*#races)
 
     self.events = {
@@ -44,7 +44,7 @@ function MainWindow:construct()
     Window.construct(self, 'ExcavatinatorMainWindow')
     self:makeDraggable()
     
-    self.frame:SetWidth(650)
+    self.frame:SetWidth(540)
     self.frame:SetHeight(285)
     self.frame:SetPoint('CENTER')
     self.frame:Hide()
