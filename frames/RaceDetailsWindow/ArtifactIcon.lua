@@ -7,6 +7,8 @@ local Label = private.Label
 local ArtifactIcon = Frame:extend()
 private.ArtifactIcon = ArtifactIcon
 
+local MONTHS = {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'}
+
 local R_RARE = 0
 local G_RARE = 0.4392
 local B_RARE = 1
@@ -74,6 +76,20 @@ function ArtifactIcon:construct(parent, index)
             tooltip:AddLine('Completed', 0, 1, 0)
         else
             tooltip:AddLine('Incomplete', 1, 1, 0)
+        end
+
+        local raceKey = self.artifact.race.key
+        if self.artifact.rarity == 'rare' and (raceKey == 'demonic' or raceKey == 'highmountaintauren' or raceKey == 'highborne') then
+            local available, left = self.artifact:isAvailable()
+            local weeks = self.artifact:getWeeksUntilAvailable()
+            if available then
+                tooltip:AddLine(left == 2 and 'Available this week and next!' or 'Available this week!', 0, 1, 0)
+            else
+                local reset = C_DateAndTime.GetCalendarTimeFromEpoch((GetServerTime() + C_DateAndTime.GetSecondsUntilWeeklyReset())*1000000)
+                local future = C_DateAndTime.AdjustTimeByDays(reset, (weeks - 1) * 7)
+                local futureAsString = MONTHS[future.month] .. ' ' .. future.monthDay .. ' ' .. future.year
+                tooltip:AddLine(weeks == 1 and 'Available next week.' or 'Available in ' .. weeks .. ' weeks (' .. futureAsString .. ')', 1, 1, 0)
+            end
         end
 
         if self.artifact.rarity == 'common' then
