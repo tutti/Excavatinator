@@ -5,7 +5,8 @@ local Event = private.Event
 private.loadSettings = function()
     if not ExcavatinatorSettings then
         ExcavatinatorSettings = {
-            useKeystones = false
+            useKeystones = false,
+            hasShownBulkBuyTip = false,
         }
     end
     private.settings = ExcavatinatorSettings

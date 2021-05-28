@@ -40,5 +40,6 @@ frames/MiniWindow.lua
 frames/MainWindow.lua
 
 MinimapManager.lua
+MerchantManager.lua
 
 main.lua

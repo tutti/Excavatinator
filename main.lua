@@ -10,6 +10,7 @@ end
 Excavatinator.events.ready:addOnceListener(function()
     private.loadSettings()
     private.loadMinimapManager()
+    private.loadMerchantManager()
     mainWindow:onLoad()
 end)
 
