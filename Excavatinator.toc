@@ -1,6 +1,6 @@
 ## Interface: 90001
 ## Title: Excavatinator
-## Notes: An archaeology helper that includes a checklist of completed artifacts
+## Notes: An archaeology helper and completion tracker. Open with /arch
 ## Author: Tutti (Azjol-Nerub EU)
 ## Version: 4.0
 ## SavedVariablesPerCharacter: ExcavatinatorSettings

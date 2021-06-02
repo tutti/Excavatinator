@@ -4,7 +4,7 @@
 This is version 4 of Excavatinator. Much like previous versions, the major version update represents a significant
 rewrite to improve the quality of the addon, as well as the quality of the code. The entire data layer has been
 separated out into a separate addon named Excavatinator API, which is open for anyone who wants to use it. The race
-information window has been redesigned as well, and now opens below the main frame rather than next to it.
+information window has been redesigned as well, and now opens below the main frame rather than on its side.
 
 +-------------------------+
 | The race details window |
@@ -33,7 +33,16 @@ fragments or keystones for.
 +---------------+
 Minimap icons are back! Any time you unearth a find, its location will be remembered and marked on your minimap whenever
 you're digging in the area. The icons will only appear when you're at the same digsite, so they won't clutter up your
-map at other times.
+map at other times. The actual tracking is done by the API side, so if you're interested in using the data for your own
+purposes in a different addon, you're entirely free to do so.
+
++---------------------------------+
+| Artifact fragment crate vendors |
++---------------------------------+
+When buying crates of fragments, the regular Blizzard interface requires you to buy them one at a time, confirming that
+you know they can't be refunded. Excavatinator adds the ability to shift+click on a crate in the vendor window to buy
+them in bulk. This still takes a few seconds, particularly for large purchases, but is much faster and easier than doing
+it manually.
 
 +-----------+
 | Bug fixes |

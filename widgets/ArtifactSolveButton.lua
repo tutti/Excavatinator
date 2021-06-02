@@ -19,7 +19,7 @@ function ArtifactSolveButton:construct(parent)
     self.pristineMark:SetPoint('CENTER', self.frame, 'TOPRIGHT', -2, -4)
     self.pristineMark:SetWidth(16)
     self.pristineMark:SetHeight(16)
-    self.pristineMark.texture = self.pristineMark:CreateTexture()
+    self.pristineMark.texture = self.pristineMark:CreateTexture(nil, 5)
     self.pristineMark.texture:SetTexture("Interface/MINIMAP/TRACKING/OBJECTICONS")
     self.pristineMark.texture:SetDrawLayer("BACKGROUND")
     self.pristineMark.texture:SetPoint("TOPLEFT")
@@ -47,6 +47,11 @@ function ArtifactSolveButton:redraw()
 
     if artifact.hasPristineVersion and not artifact.pristineHasBeenCompleted then
         self.pristineMark.texture:Show()
+        if artifact.pristineHasBeenStarted then
+            self.pristineMark.texture:SetTexCoord(2/8, 3/8, 1/2, 1)
+        else
+            self.pristineMark.texture:SetTexCoord(1/8, 2/8, 1/2, 1)
+        end
     else
         self.pristineMark.texture:Hide()
     end

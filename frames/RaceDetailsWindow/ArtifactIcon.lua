@@ -142,6 +142,11 @@ function ArtifactIcon:_redraw()
 
     if self.artifact.hasPristineVersion and not self.artifact.pristineHasBeenCompleted then
         self.pristineMark.texture:Show()
+        if self.artifact.pristineHasBeenStarted then
+            self.pristineMark.texture:SetTexCoord(2/8, 3/8, 1/2, 1)
+        else
+            self.pristineMark.texture:SetTexCoord(1/8, 2/8, 1/2, 1)
+        end
     else
         self.pristineMark.texture:Hide()
     end
