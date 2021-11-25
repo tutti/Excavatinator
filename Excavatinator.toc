@@ -7,6 +7,7 @@
 ## Dependencies: ExcavatinatorAPI
 
 Libs\LibStub\LibStub.lua
+Libs/CallbackHandler-1.0.lua
 Libs\HereBeDragons\HereBeDragons-2.0.lua
 Libs\HereBeDragons\HereBeDragons-Pins-2.0.lua
 
