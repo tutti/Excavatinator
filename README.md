@@ -73,3 +73,14 @@ a second time.
 
 ## Known issues
 - Sometimes, when hovering over an artifact icon, the description doesn't load. Hovering over it a second time will show the description.
+
+## Why two addons?
+I am not, nor have I ever been, a designer. I have tried to make Excavatinator
+acceptably pleasant to look at, particularly with the latest version, but I
+expect there are others who can do much better, should they want to. If anyone
+wants to make use of the data processing aspect of Excavatinator and just design
+a better interface, I wanted that to be possible without needing to load the
+entire UI of Excavatinator as well.
+
+I may, of course, be getting well ahead of myself in thinking that is something
+anyone would want to do, but in case someone does - have at it :)
