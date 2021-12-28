@@ -8,6 +8,7 @@ local TextureButton = private.TextureButton
 local SurveyButton = private.SurveyButton
 local CrateManager = private.CrateManager
 local ArtifactSolveButton = private.ArtifactSolveButton
+local BlinkerButton = private.BlinkerButton
 
 local MiniWindow = Window:extend()
 private.MiniWindow = MiniWindow
@@ -88,95 +89,67 @@ function MiniWindow:onLoad()
         end)
     end
 
-    self.redButton = CreateFrame('Button', 'ExcavatinatorSurveyResultRedButton', self.frame)
-    self.redButton:SetWidth(90)
-    self.redButton:SetHeight(50)
-    self.redButton:SetPoint('BOTTOMLEFT', 15, 15)
-    self.redButtonBlinker = CreateFrame('Frame', 'ExcavatinatorSurveyResultRedButtonBlinker', self.redButton)
-    self.redButtonBlinker:SetWidth(16)
-    self.redButtonBlinker:SetHeight(16)
-    self.redButtonBlinker:SetPoint('TOPLEFT', 37, -10)
-    self.redButtonBlinker.texture = self.redButtonBlinker:CreateTexture()
-    self.redButtonBlinker.texture:SetDrawLayer('BACKGROUND')
-    self.redButtonBlinker.texture:SetAllPoints()
-    self.redButtonBlinker.texture:SetColorTexture(255, 0, 0)
-    self.redButtonBlinker.animationGroup = self.redButtonBlinker:CreateAnimationGroup()
-    self.redButtonBlinker.animationGroup:SetLooping('BOUNCE')
-    self.redButtonBlinker.animation = self.redButtonBlinker.animationGroup:CreateAnimation('Alpha')
-    self.redButtonBlinker.animation:SetFromAlpha(1)
-    self.redButtonBlinker.animation:SetToAlpha(0.4)
-    self.redButtonBlinker.animation:SetDuration(0.6)
-    self.redButtonBlinker.animation:SetSmoothing('IN_OUT')
-    self.redButtonBlinker.animationGroup:Play()
-    self.redButtonLabel = Label:new(self.redButton, 'Red')
-    self.redButtonLabel.frame:SetPoint('TOP',0, -30)
-    Tooltip:new(self.redButton, function(tooltip)
-        tooltip:AddLine('Click to mark your')
-        tooltip:AddLine('last survey as RED')
-    end)
-    self.redButton:SetScript('OnClick', function()
-        private.MinimapManager:setLastSurveyResult('red')
+    self.redButton = BlinkerButton:new('ExcavatinatorSurveyResultRedButton', self.frame, 'red')
+    self.redButton.frame:SetPoint('BOTTOMLEFT', 15, 15)
+
+    self.yellowButton = BlinkerButton:new('ExcavatinatorSurveyResultYellowButton', self.frame, 'yellow')
+    self.yellowButton.frame:SetPoint('BOTTOMLEFT', 65, 15)
+
+    self.greenButton = BlinkerButton:new('ExcavatinatorSurveyResultGreenButton', self.frame, 'green')
+    self.greenButton.frame:SetPoint('BOTTOMLEFT', 115, 15)
+
+    self.distanceFrame = CreateFrame('Frame', 'ExcavatinatorDistanceFrame', self.frame)
+    self.distanceFrame:SetWidth(90)
+    self.distanceFrame:SetHeight(30)
+    self.distanceFrame:SetPoint('BOTTOMRIGHT', -15, 25)
+    Tooltip:new(self.distanceFrame, function(tooltip)
+        tooltip:AddLine('The distance you\'ve moved')
+        tooltip:AddLine('since your last survey')
     end)
 
-    self.yellowButton = CreateFrame('Button', 'ExcavatinatorSurveyResultYellowButton', self.frame)
-    self.yellowButton:SetWidth(90)
-    self.yellowButton:SetHeight(50)
-    self.yellowButton:SetPoint('BOTTOMLEFT', 105, 15)
-    self.yellowButtonBlinker = CreateFrame('Frame', 'ExcavatinatorSurveyResultYellowButtonBlinker', self.yellowButton)
-    self.yellowButtonBlinker:SetWidth(16)
-    self.yellowButtonBlinker:SetHeight(16)
-    self.yellowButtonBlinker:SetPoint('TOPLEFT', 37, -10)
-    self.yellowButtonBlinker.texture = self.yellowButtonBlinker:CreateTexture()
-    self.yellowButtonBlinker.texture:SetDrawLayer('BACKGROUND')
-    self.yellowButtonBlinker.texture:SetAllPoints()
-    self.yellowButtonBlinker.texture:SetColorTexture(255, 255, 0)
-    self.yellowButtonBlinker.animationGroup = self.yellowButtonBlinker:CreateAnimationGroup()
-    self.yellowButtonBlinker.animationGroup:SetLooping('BOUNCE')
-    self.yellowButtonBlinker.animation = self.yellowButtonBlinker.animationGroup:CreateAnimation('Alpha')
-    self.yellowButtonBlinker.animation:SetFromAlpha(1)
-    self.yellowButtonBlinker.animation:SetToAlpha(0.4)
-    self.yellowButtonBlinker.animation:SetDuration(0.3)
-    self.yellowButtonBlinker.animation:SetSmoothing('IN_OUT')
-    self.yellowButtonBlinker.animationGroup:Play()
-    self.yellowButtonLabel = Label:new(self.yellowButton, 'Yellow')
-    self.yellowButtonLabel.frame:SetPoint('TOP', 0, -30)
-    Tooltip:new(self.yellowButton, function(tooltip)
-        tooltip:AddLine('Click to mark your')
-        tooltip:AddLine('last survey as YELLOW')
-    end)
-    self.yellowButton:SetScript('OnClick', function()
-        private.MinimapManager:setLastSurveyResult('yellow')
+    self.distanceLabel = Label:new(self.distanceFrame, '50', 20)
+    self.distanceLabel.frame:SetPoint('TOP')
+
+    self.distanceBarGreen = CreateFrame('Frame', 'ExcavatinatorDistanceFrameGreen', self.distanceFrame)
+    self.distanceBarGreen:SetWidth(40)
+    self.distanceBarGreen:SetHeight(6)
+    self.distanceBarGreen:SetPoint('BOTTOMLEFT')
+    self.distanceBarGreen.texture = self.distanceBarGreen:CreateTexture()
+    self.distanceBarGreen.texture:SetColorTexture(0, 1, 0, 1)
+    self.distanceBarGreen.texture:SetAllPoints(self.distanceBarGreen)
+
+    self.distanceBarYellow = CreateFrame('Frame', 'ExcavatinatorDistanceFrameYellow', self.distanceFrame)
+    self.distanceBarYellow:SetWidth(40)
+    self.distanceBarYellow:SetHeight(6)
+    self.distanceBarYellow:SetPoint('BOTTOMLEFT', 40, 0)
+    self.distanceBarYellow.texture = self.distanceBarYellow:CreateTexture()
+    self.distanceBarYellow.texture:SetColorTexture(1, 1, 0, 1)
+    self.distanceBarYellow.texture:SetAllPoints(self.distanceBarYellow)
+
+    self.distanceBarRed = CreateFrame('Frame', 'ExcavatinatorDistanceFrameRed', self.distanceFrame)
+    self.distanceBarRed:SetWidth(10)
+    self.distanceBarRed:SetHeight(6)
+    self.distanceBarRed:SetPoint('BOTTOMLEFT', 80, 0)
+    self.distanceBarRed.texture = self.distanceBarRed:CreateTexture()
+    self.distanceBarRed.texture:SetColorTexture(1, 0, 0, 1)
+    self.distanceBarRed.texture:SetAllPoints(self.distanceBarRed)
+
+    self.distanceArrow = CreateFrame('Frame', nil, self.distanceFrame)
+    self.distanceArrow:SetWidth(24)
+    self.distanceArrow:SetHeight(24)
+    self.distanceArrow.texture = self.distanceArrow:CreateTexture()
+    self.distanceArrow.texture:SetTexture(136431)
+    self.distanceArrow.texture:SetDrawLayer("OVERLAY")
+    self.distanceArrow.texture:SetAllPoints()
+    self.distanceArrow:SetPoint('BOTTOMLEFT', -12, -14)
+
+    self.lastSurvey = nil
+
+    private.MinimapManager.surveyUpdate:addListener(function(survey)
+        self.lastSurvey = survey
     end)
 
-    self.greenButton = CreateFrame('Button', 'ExcavatinatorSurveyResultGreenButton', self.frame)
-    self.greenButton:SetWidth(90)
-    self.greenButton:SetHeight(50)
-    self.greenButton:SetPoint('BOTTOMLEFT', 195, 15)
-    self.greenButtonBlinker = CreateFrame('Frame', 'ExcavatinatorSurveyResultGreenButtonBlinker', self.greenButton)
-    self.greenButtonBlinker:SetWidth(16)
-    self.greenButtonBlinker:SetHeight(16)
-    self.greenButtonBlinker:SetPoint('TOPLEFT', 37, -10)
-    self.greenButtonBlinker.texture = self.greenButtonBlinker:CreateTexture()
-    self.greenButtonBlinker.texture:SetDrawLayer('BACKGROUND')
-    self.greenButtonBlinker.texture:SetAllPoints()
-    self.greenButtonBlinker.texture:SetColorTexture(0, 255, 0)
-    self.greenButtonBlinker.animationGroup = self.greenButtonBlinker:CreateAnimationGroup()
-    self.greenButtonBlinker.animationGroup:SetLooping('BOUNCE')
-    self.greenButtonBlinker.animation = self.greenButtonBlinker.animationGroup:CreateAnimation('Alpha')
-    self.greenButtonBlinker.animation:SetFromAlpha(1)
-    self.greenButtonBlinker.animation:SetToAlpha(0.7)
-    self.greenButtonBlinker.animation:SetDuration(0.12)
-    self.greenButtonBlinker.animation:SetSmoothing('IN_OUT')
-    self.greenButtonBlinker.animationGroup:Play()
-    self.greenButtonLabel = Label:new(self.greenButton, 'Green')
-    self.greenButtonLabel.frame:SetPoint('TOP', 0, -30)
-    Tooltip:new(self.greenButton, function(tooltip)
-        tooltip:AddLine('Click to mark your')
-        tooltip:AddLine('last survey as GREEN')
-    end)
-    self.greenButton:SetScript('OnClick', function()
-        private.MinimapManager:setLastSurveyResult('green')
-    end)
+    self.frame:SetScript('OnUpdate', function() self:updateDistance() end)
 
     Excavatinator.events.raceUpdated:addListener(function(race) self:_update(race) end)
     Excavatinator.events.digsitesUpdated:addListener(function() self:_update(self.race) end)
@@ -234,4 +207,48 @@ end
 function MiniWindow:open()
     private.settings.showMiniWindow = true
     self.frame:Show()
+end
+
+function MiniWindow:updateDistance()
+    if not self.lastSurvey then
+        self.distanceLabel:setText('--')
+        self.distanceArrow:Hide()
+        self.distanceBarGreen.texture:SetAlpha(0.2)
+        self.distanceBarYellow.texture:SetAlpha(0.2)
+        self.distanceBarRed.texture:SetAlpha(0.2)
+    else
+        local playerX, playerY = UnitPosition('player')
+        local distance = math.floor(CalculateDistance(playerX, playerY, self.lastSurvey.x, self.lastSurvey.y))
+        self.distanceLabel:setText(distance)
+        self.distanceArrow:Show()
+        self.distanceArrow:SetPoint('BOTTOMLEFT', min(distance, 90)-12, -14)
+        self.distanceBarGreen.texture:SetAlpha(1)
+        self.distanceBarYellow.texture:SetAlpha(1)
+        self.distanceBarRed.texture:SetAlpha(1)
+        self.distanceArrow.texture:SetAlpha(1)
+
+        if self.lastSurvey.result and self.lastSurvey.result ~= 'green' then
+            self.distanceBarGreen.texture:SetAlpha(0.2)
+        end
+
+        if self.lastSurvey.result and self.lastSurvey.result ~= 'yellow' then
+            self.distanceBarYellow.texture:SetAlpha(0.2)
+        end
+
+        if self.lastSurvey.result and self.lastSurvey.result ~= 'red' then
+            self.distanceBarRed.texture:SetAlpha(0.2)
+        end
+
+        if self.lastSurvey.result == 'green' and distance > 45 then
+            self.distanceArrow.texture:SetAlpha(0.2)
+        end
+
+        if self.lastSurvey.result == 'yellow' and (distance < 35 or distance > 85) then
+            self.distanceArrow.texture:SetAlpha(0.2)
+        end
+
+        if self.lastSurvey.result == 'red' and distance < 75 then
+            self.distanceArrow.texture:SetAlpha(0.2)
+        end
+    end
 end

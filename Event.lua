@@ -5,6 +5,27 @@ local Class = private.Class
 local Event = Class:extend()
 private.Event = Event
 
+local function createListenable(event)
+    local listenable = {}
+    setmetatable(listenable, {
+        __index = {
+            name = event.name,
+            addListener = function(sf, listener)
+                event:addListener(listener)
+            end,
+            addOnceListener = function(sf, listener)
+                event:addOnceListener(listener)
+            end,
+            removeListener = function(sf, listener)
+                event:removeListener(listener)
+            end
+        },
+        __newindex = function() end,
+        __metatable = nil,
+    })
+    return listenable
+end
+
 function Event:construct(name)
     self.name = name
     self.listeners = {}

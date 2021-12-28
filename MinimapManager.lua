@@ -1,6 +1,7 @@
 local _, private = ...
 
 local Class = private.Class
+local Event = private.Event
 
 local MinimapManager = Class:extend()
 
@@ -36,6 +37,8 @@ function MinimapManager:construct()
         end
         self:updatePins()
     end)
+
+    self.surveyUpdate = Event:new('surveyUpdate')
 end
 
 function MinimapManager:updatePins()
@@ -44,6 +47,8 @@ function MinimapManager:updatePins()
     for i, find in ipairs(finds) do
         self:createPinForFind(find)
     end
+
+    self.surveyUpdate:trigger(#self.surveys > 0 and self.surveys[#self.surveys] or nil)
 end
 
 function MinimapManager:createPinForFind(find)
