@@ -124,9 +124,9 @@ function MainWindow:onLoad()
     self.surveyButton.frame:SetPoint('BOTTOM', 0, 30)
 
     self.keystoneCheckbox = CheckButton:new("ExcavatinatorKeystoneCheckbutton", self.frame, "Use keystones")
+    self.keystoneCheckbox.frame:SetWidth(420)
     self.keystoneCheckbox.frame:SetPoint("BOTTOMLEFT", 30, 70)
-    self.keystoneCheckbox.frame:SetHitRectInsets(0, -100, 0, 0)
-    self.keystoneCheckbox.frame:SetChecked(private.settings.useKeystones)
+    self.keystoneCheckbox:setChecked(private.settings.useKeystones)
 
     self.keystoneCheckbox.events.updated:addListener(function(val)
         private.settings.useKeystones = val

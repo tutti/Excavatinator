@@ -12,6 +12,7 @@ function SpellButton:construct(name, parent, spell)
 
     self.frame:SetAttribute("type", "spell")
     self.frame:SetAttribute("unit", "player")
+    self.frame:RegisterForClicks("AnyUp", "AnyDown")
 
     self.cooldown = CreateFrame("Cooldown", nil, self.frame)
     self.cooldown:SetSwipeTexture('Interface/Cooldown/cooldown2')

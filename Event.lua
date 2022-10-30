@@ -9,7 +9,6 @@ function Event:construct(name)
     self.name = name
     self.listeners = {}
     self.onceListeners = {}
-    self.listenable = createListenable(self)
 end
 
 function Event:addListener(listener)

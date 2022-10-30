@@ -21,6 +21,7 @@ function CrateManager:construct(parent)
     self.button.frame:SetAttribute("type", "item")
     self.button.frame:SetAttribute("unit", "player")
     self.button.frame:SetPoint('LEFT', 0, 0)
+    self.button.frame:RegisterForClicks("AnyUp", "AnyDown")
 
     self.label = Label:new(self.frame, "0 (0)")
     self.label.frame:SetPoint("LEFT", self.button.frame, "RIGHT", 10, 0)
@@ -42,7 +43,8 @@ function CrateManager:update()
     if #crateables == 0 then
         self.button.frame:Disable()
     else
+        local item = GetItemInfo(crateables[1])
         self.button.frame:Enable()
-        self.button.frame:SetAttribute('item', GetItemInfo(crateables[1]))
+        self.button.frame:SetAttribute('item', item)
     end
 end
