@@ -1,4 +1,4 @@
-## Interface: 90001
+## Interface: 100207
 ## Title: Excavatinator
 ## Notes: An archaeology helper and completion tracker. Open with /arch
 ## Author: Tutti (Azjol-Nerub EU)
