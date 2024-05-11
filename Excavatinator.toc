@@ -2,7 +2,7 @@
 ## Title: Excavatinator
 ## Notes: An archaeology helper and completion tracker. Open with /arch
 ## Author: Tutti (Azjol-Nerub EU)
-## Version: 4.0
+## Version: 4.1
 ## SavedVariablesPerCharacter: ExcavatinatorSettings
 ## Dependencies: ExcavatinatorAPI
 
