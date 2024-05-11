@@ -9,7 +9,6 @@ private.CheckButton = CheckButton
 function CheckButton:construct(name, parent, text)
     Button.construct(self, "CheckButton", name, parent, "SettingsCheckBoxControlTemplate")
     self.frame.CheckBox:SetPoint("LEFT", 0, 0)
-    self.frame:SetHitRectInsets(0, 0, 0, 0)
     self.frame.CheckBox:SetScript("OnClick", function() self:onClick(not self.isChecked) end)
     self.frame.Text:SetText(text)
     self.frame.Text:SetTextColor(1, 1, 1)

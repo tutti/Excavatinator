@@ -15,10 +15,11 @@ local MiniWindow = private.MiniWindow
 
 local Page = Frame:extend()
 
-function Page:construct(pageName, parent, races)
+function Page:construct(pageName, tocVersion, parent, races)
     Frame.construct(self, nil, 'ExcavatinatorMainWindowPage' .. pageName, parent)
 
     self.name = pageName
+    self.tocVersion = tocVersion
 
     self.frame:SetPoint('TOPLEFT', 30, -35)
     self.frame:SetWidth(480)
@@ -74,43 +75,49 @@ end
 
 function MainWindow:onLoad()
     self.pages = {
-        Page:new(EXPANSION_NAME7, self.frame, {
+        Page:new(EXPANSION_NAME7, 80000, self.frame, {
             Excavatinator:getRaceByKey('drust'),
             Excavatinator:getRaceByKey('zandalari'),
         }),
-        Page:new(EXPANSION_NAME6, self.frame, {
+        Page:new(EXPANSION_NAME6, 70000, self.frame, {
             Excavatinator:getRaceByKey('demonic'),
             Excavatinator:getRaceByKey('highmountaintauren'),
             Excavatinator:getRaceByKey('highborne'),
         }),
-        Page:new(EXPANSION_NAME5, self.frame, {
+        Page:new(EXPANSION_NAME5, 60000, self.frame, {
             Excavatinator:getRaceByKey('arakkoa'),
             Excavatinator:getRaceByKey('draenorclans'),
             Excavatinator:getRaceByKey('ogre'),
         }),
-        Page:new(EXPANSION_NAME4, self.frame, {
+        Page:new(EXPANSION_NAME4, 50000, self.frame, {
             Excavatinator:getRaceByKey('pandaren'),
             Excavatinator:getRaceByKey('mogu'),
             Excavatinator:getRaceByKey('mantid'),
         }),
-        Page:new(EXPANSION_NAME3, self.frame, {
+        Page:new(EXPANSION_NAME3, 40000, self.frame, {
             Excavatinator:getRaceByKey('tolvir'),
         }),
-        Page:new(EXPANSION_NAME2, self.frame, {
+        Page:new(EXPANSION_NAME2, 40000, self.frame, {
             Excavatinator:getRaceByKey('nerubian'),
             Excavatinator:getRaceByKey('vrykul'),
         }),
-        Page:new(EXPANSION_NAME1, self.frame, {
+        Page:new(EXPANSION_NAME1, 40000, self.frame, {
             Excavatinator:getRaceByKey('draenei'),
             Excavatinator:getRaceByKey('orc'),
         }),
-        Page:new(EXPANSION_NAME0, self.frame, {
+        Page:new(EXPANSION_NAME0, 40000, self.frame, {
             Excavatinator:getRaceByKey('dwarf'),
             Excavatinator:getRaceByKey('nightelf'),
             Excavatinator:getRaceByKey('troll'),
             Excavatinator:getRaceByKey('fossil')
         }),
     }
+
+    for i = 1, #self.pages do
+        while self.pages[i] and self.pages[i].tocVersion > private.TOC_VERSION do
+            table.remove(self.pages, i)
+        end
+    end
 
     self.detailsWindow = RaceDetailsWindow:new(self.frame)
 
@@ -126,6 +133,7 @@ function MainWindow:onLoad()
     self.keystoneCheckbox = CheckButton:new("ExcavatinatorKeystoneCheckbutton", self.frame, "Use keystones")
     self.keystoneCheckbox.frame:SetWidth(420)
     self.keystoneCheckbox.frame:SetPoint("BOTTOMLEFT", 30, 70)
+    self.keystoneCheckbox.frame:SetPoint("BOTTOMRIGHT", -320, 70)
     self.keystoneCheckbox:setChecked(private.settings.useKeystones)
 
     self.keystoneCheckbox.events.updated:addListener(function(val)
@@ -133,8 +141,10 @@ function MainWindow:onLoad()
         private.events.settingsChanged:trigger()
     end)
 
-    self.crateManager = CrateManager:new(self.frame)
-    self.crateManager.frame:SetPoint('BOTTOMLEFT', 30, 30)
+    if private.TOC_VERSION >= 50000 then
+        self.crateManager = CrateManager:new(self.frame)
+        self.crateManager.frame:SetPoint('BOTTOMLEFT', 30, 30)
+    end
 
     if private.settings.showMainWindow then self.frame:Show() end
 

@@ -7,12 +7,21 @@ function showMainWindow()
     mainWindow:open()
 end
 
-Excavatinator.events.ready:addOnceListener(function()
+local function onReady()
     private.loadSettings()
     private.loadMinimapManager()
     private.loadMerchantManager()
     mainWindow:onLoad()
-end)
+end
+
+--Excavatinator.events.ready:addOnceListener(function()
+--end)
+
+if Excavatinator.ready then
+    onReady()
+else
+    Excavatinator.events.ready:addOnceListener(onReady)
+end
 
 SLASH_EXCAVATINATOR1 = '/arch'
 SlashCmdList["EXCAVATINATOR"] = showMainWindow

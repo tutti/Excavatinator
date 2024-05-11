@@ -42,7 +42,7 @@ function MerchantManager:construct()
         local itemID = GetMerchantItemID(itemIndex)
         if not ITEMS[itemID] then return end
 
-        local bagSpace = GetContainerNumFreeSlots(0) + GetContainerNumFreeSlots(1) + GetContainerNumFreeSlots(2) + GetContainerNumFreeSlots(3) + GetContainerNumFreeSlots(4)
+        local bagSpace = C_Container.GetContainerNumFreeSlots(0) + C_Container.GetContainerNumFreeSlots(1) + C_Container.GetContainerNumFreeSlots(2) + C_Container.GetContainerNumFreeSlots(3) + C_Container.GetContainerNumFreeSlots(4)
         local purchaseableItems = math.min(bagSpace, Excavatinator.numberOfCrates)
         if purchaseableItems == 0 then return end
         StackSplitFrame:OpenStackSplitFrame(purchaseableItems, self, "BOTTOMLEFT", "TOPLEFT", 1)

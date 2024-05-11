@@ -53,8 +53,10 @@ function MiniWindow:onLoad()
     self.surveyButton.frame:SetHeight(64)
     self.surveyButton.frame:SetPoint('TOPLEFT', 18, -15)
 
-    self.crateManager = CrateManager:new(self.frame)
-    self.crateManager.frame:SetPoint('TOPLEFT', 100, -15)
+    if private.TOC_VERSION >= 50000 then
+        self.crateManager = CrateManager:new(self.frame)
+        self.crateManager.frame:SetPoint('TOPLEFT', 100, -15)
+    end
 
     self.artifactButton = ArtifactSolveButton:new(self.frame)
     self.artifactButton.frame:SetPoint('TOPLEFT', 100, -47)
